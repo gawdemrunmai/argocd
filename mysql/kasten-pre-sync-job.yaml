@@ -22,7 +22,7 @@ spec:
            - -c
            - |
              # Create a backup policy using Kasten API
-             kasten_api_url="http://10.48.70.250:32365/k10/#/"  # Adjust this URL based on your Kasten API endpoint
+             kasten_api_url="10.48.70.250:32365/k10/#/"  # Adjust this URL based on your Kasten API endpoint
              backup_policy_name="mysqlapp-backup-policy-$(date +%Y%m%d%H%M%S)"
              cat <<EOF | curl -X POST -d @- -H "Content-Type: application/json" $kasten_api_url/config/policies
              {
