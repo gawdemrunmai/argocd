@@ -34,6 +34,9 @@ spec:
                subject:
                  name: $NAMESPACE
                  namespace: $NAMESPACE
+               locationProfile:
+                 name: mysql-test
+                 namespace: kasten-io
              EOF
             
              # Wait until the backup action is complete 
