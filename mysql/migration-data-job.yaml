@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: migration-data-job
-  annotations:
+  annotations: 
     argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/sync-wave: "2"
 spec:
@@ -11,26 +11,25 @@ spec:
       creationTimestamp: null
     spec:
       containers:
-      - command:
+      - command: 
         - /bin/bash
         - -c
         - |
           #!/bin/bash
           # Oh no !! I forgot to the "where species in ${SPECIES}" clause in the delete command :(
-          mysql -h mysql -p${MYSQL_ROOT_PASSWORD} -uroot -Bse "delete from test.pets"
+          mysql -h mysql -p${MYSQL_ROOT_PASSWORD} -uroot -Bse "delete from test.pets where species in ${SPECIES}" 
         env:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
               key: mysql-root-password
-              name: mysql
+              name: mysql        
         - name: SPECIES
           valueFrom:
             configMapKeyRef:
               name: forbidden-species
-              key: species
+              key: species      
         image: mysql
         imagePullPolicy: IfNotPresent
         name: data-job
       restartPolicy: Never
-
